@@ -40,6 +40,8 @@ namespace ToDoApp.UI
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseStatusCodePagesWithReExecute("/Home/NotFound", "?code={0}");
+
             app.UseStaticFiles();
 
             app.UseRouting();
