@@ -2,6 +2,7 @@
 using FluentValidation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ToDoApp.Business.Extensions;
 using ToDoApp.Business.Interfaces;
 using ToDoApp.Common.ResponseObjects;
 using ToDoApp.DataAccess.UnitOfWork;
@@ -38,17 +39,7 @@ namespace ToDoApp.Business.Services
             }
             else
             {
-                List<CustomValidationError> errors = new List<CustomValidationError>();
-                foreach (var error in validationResult.Errors)
-                {
-                    errors.Add(new()
-                    {
-                        ErrorMessage = error.ErrorMessage,
-                        PropertyName = error.PropertyName
-                    });
-                }
-
-                return new Response<WorkCreateDto>(ResponseType.ValidationError, dto, errors);
+                return new Response<WorkCreateDto>(ResponseType.ValidationError, dto, validationResult.CustomValidationErrors());
             }
         }
 
@@ -97,17 +88,7 @@ namespace ToDoApp.Business.Services
             }
             else
             {
-                List<CustomValidationError> errors = new List<CustomValidationError>();
-                foreach (var error in validatorResult.Errors)
-                {
-                    errors.Add(new()
-                    {
-                        ErrorMessage = error.ErrorMessage,
-                        PropertyName = error.PropertyName
-                    });
-                }
-
-                return new Response<UpdateDto>(ResponseType.ValidationError, dto, errors);
+                return new Response<UpdateDto>(ResponseType.ValidationError, dto, validatorResult.CustomValidationErrors());
             }
             
         }
