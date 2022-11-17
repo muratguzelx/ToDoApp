@@ -1,0 +1,42 @@
+﻿@model List<WorkListDto>
+@{
+    Layout = "_Layout";
+}
+
+<table class="table table-hover table-bordered">
+    <div class="text-right my-2" >
+        <a asp-action="Create" asp-controller="Home" class="btn btn-success btn-sm">Yeni İş Ekle</a>
+
+    </div>
+    <thead>
+        <tr>
+            <th>
+                İş:
+            </th>
+            <th>
+                Durum:
+            </th>
+            <th>
+                İşlem:
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Definition
+                </td>
+                <td>
+                    @(@item.IsComplete ? "Tamamlandı" : "Tamamlanmadı")
+                </td>
+                <td>
+                    <a asp-action="Update" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-warning">Güncelle</a>
+                    <a asp-action="Remove" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-success">Sil</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

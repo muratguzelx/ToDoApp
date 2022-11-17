@@ -1,0 +1,23 @@
+﻿@model UpdateDto
+@{
+    Layout = "_Layout";
+}
+
+<form asp-action="Update" asp-controller="Home" method="post">
+    <input type="hidden" asp-for="@Model.Id"/>
+    <div class="mb-3">
+        <label>İşin Tanımı :</label>
+        <input asp-for="@Model.Definition" class="form-control"/>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input " type="checkbox" asp-for="@Model.IsComplete">
+        <label class="form-check-label">
+            Tamamlandı mı ?
+        </label>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Kaydet</button>
+    </div>
+    <div asp-validation-summary="All" class="table-danger"></div>
+
+</form>
